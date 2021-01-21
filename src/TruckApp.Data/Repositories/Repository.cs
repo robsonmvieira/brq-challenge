@@ -40,8 +40,9 @@ namespace TruckApp.Data.Repositories
             await _truckContext.SaveChangesAsync();
         }
 
-        public async Task Remove(T entity)
+        public async Task Remove(Guid id)
         {
+            var entity = await GetById(id);
             Query.Remove(entity);
             await _truckContext.SaveChangesAsync();
         }
