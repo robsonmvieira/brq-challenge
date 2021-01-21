@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TruckApp.Core\TruckApp.Core.csproj" />
+      <ProjectReference Include="..\TruckApp.Data\TruckApp.Data.csproj" />
       <ProjectReference Include="..\TruckApp.Domain\TruckApp.Domain.csproj" />
     </ItemGroup>
 

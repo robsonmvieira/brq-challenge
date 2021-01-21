@@ -21,7 +21,9 @@ namespace Truck.Application.Services
         }
         public async Task AddNewTruck(TruckDtoRequest request)
         {
+            
             var truck = _mapper.Map<TruckApp.Domain.Entities.Truck>(request);
+            truck.IsValid();
             await _truckRepository.Add(truck);
         }
 
@@ -41,10 +43,15 @@ namespace Truck.Application.Services
             return response;
         }
 
-        public async Task UpdateTruck(TruckDtoRequest request)
+        public async Task UpdateTruck(Guid id, TruckDtoRequest request)
         {
-            var source = _mapper.Map<TruckApp.Domain.Entities.Truck>(request);
-            await _truckRepository.Update(source);
+            var truckExists = await _truckRepository.GetById(id);
+            if (truckExists == null) throw new DomainException("Truck not found");
+            truckExists.SetModelo(request.Modelo);
+            truckExists.SetAnoModelo(request.AnoModelo);
+            truckExists.IsValid();
+            await _truckRepository.Update(truckExists);
+            
         }
 
         public async Task RemoveTruck(Guid id)

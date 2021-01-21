@@ -12,7 +12,7 @@ namespace Truck.Application.Services.interfaces
 
         Task<TruckDtoResponse> GetTruckById(Guid id);
 
-        Task UpdateTruck(TruckDtoRequest request);
+        Task UpdateTruck(Guid id,TruckDtoRequest request);
 
         Task RemoveTruck(Guid id);
     }

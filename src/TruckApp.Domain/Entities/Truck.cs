@@ -1,4 +1,8 @@
+using FluentValidation;
+using TruckApp.Domain.Rules;
+
 namespace TruckApp.Domain.Entities
+
 {
     public class Truck: Entity
     {
@@ -13,5 +17,17 @@ namespace TruckApp.Domain.Entities
             AnoFabricacao = anoFabricacao;
             AnoModelo = anoModelo;
         }
+
+        public void SetModelo(string modelo)
+        {
+            Modelo = modelo;
+        }
+
+        public void SetAnoModelo(int anoModelo)
+        {
+            AnoModelo = anoModelo;
+        }
+
+        public void IsValid() => new TruckValidator().ValidateAndThrow(this);
     }
 }
