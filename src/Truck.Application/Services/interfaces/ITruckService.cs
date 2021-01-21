@@ -10,7 +10,7 @@ namespace Truck.Application.Services.interfaces
         Task AddNewTruck(TruckDtoRequest request);
         Task<IEnumerable<TruckDtoResponse>> ListTrucks();
 
-        Task<TruckDtoResponse> GetTruckById(Guid guid);
+        Task<TruckDtoResponse> GetTruckById(Guid id);
 
         Task UpdateTruck(TruckDtoRequest request);
 

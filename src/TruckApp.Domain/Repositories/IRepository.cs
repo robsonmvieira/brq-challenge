@@ -11,6 +11,6 @@ namespace TruckApp.Domain.Repositories
         Task<IEnumerable<T>> ListAll();
         Task<T> GetById(Guid id);
         Task Update(T entity);
-        Task Remove(T entity);
+        Task Remove(Guid id);
     }
 }
