@@ -39,8 +39,8 @@ namespace StruckApp.API.Controllers
             }
 
             var source = _mapper.Map<TruckDtoRequest>(request);
-            await _truckService.AddNewTruck(source);
-            return CustomResponse();
+            
+            return CustomResponse(await _truckService.AddNewTruck(source));
         }
         
         [HttpPut("{id}")]

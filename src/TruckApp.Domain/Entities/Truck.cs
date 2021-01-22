@@ -15,10 +15,10 @@ namespace TruckApp.Domain.Entities
         public int ModelYear { get; private set; }
 
 
-        public Truck(string model, int yearManufacture, int modelYear)
+        public Truck(string model,  int modelYear)
         {
             Model = model;
-            YearManufacture = yearManufacture;
+            YearManufacture = DateTime.Now.Year;
             ModelYear = modelYear;
         }
 

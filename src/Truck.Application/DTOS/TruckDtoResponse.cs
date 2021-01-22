@@ -6,7 +6,7 @@ namespace Truck.Application.DTOS
     {
         public Guid Id { get; set; }
         public string Model { get; set; }
-        public int YearModel { get; set; }
+        public int ModelYear { get; set; }
         public int YearManufacture { get; set; }
     }
 }

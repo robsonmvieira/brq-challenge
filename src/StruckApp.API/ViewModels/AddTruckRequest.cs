@@ -9,7 +9,7 @@ namespace StruckApp.API.ViewModels
         public string Model { get; set; }
         
         [Required(ErrorMessage = "The {0} It's required")]
-        public int YearModel { get; set; }
+        public int ModelYear { get; set; }
         
         public int YearManufacture = DateTime.UtcNow.Year;
       
