@@ -5,12 +5,12 @@ namespace StruckApp.API.ViewModels
 {
     public class UpdateTruckRequest
     {
-        [Required(ErrorMessage = "O {0} não pode ser vazio")]
-        public string Modelo { get; set; }
+        [Required(ErrorMessage = "The {0} It's required")]
+        public string Model { get; set; }
         
-        [Required(ErrorMessage = "O {0} não pode ser vazio")]
-        public int AnoModelo { get; set; }
+        [Required(ErrorMessage = "The {0} It's required")]
+        public int YearModel { get; set; }
         
-        public int AnoFabricacao = DateTime.UtcNow.Year;
+        public int YearManufacture = DateTime.UtcNow.Year;
     }
 }

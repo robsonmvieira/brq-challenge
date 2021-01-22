@@ -9,10 +9,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\TruckApp.Domain\TruckApp.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Compile Remove="DomainObject\TruckValidator.cs" />
     </ItemGroup>
 

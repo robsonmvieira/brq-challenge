@@ -11,12 +11,12 @@ namespace TruckApp.Domain.Rules
         private int Year = DateTime.UtcNow.Year;
         public TruckValidator()
         {
-            RuleFor(x => x.Modelo).Must(
-                x => NameOptions.Contains(x)).WithMessage("Você só pode Escolher Entre  os modelos: FH e FM");
+            RuleFor(x => x.Model).Must(
+                x => NameOptions.Contains(x)).WithMessage("You can only choose between models: FH and FM");
 
-            RuleFor(x => x.AnoFabricacao).Must(x => x == Year).WithMessage("O Ano deve ser o ano atual");
-            RuleFor(x => x.AnoModelo).GreaterThanOrEqualTo(Year)
-                .WithMessage($"O ano modelo do  veículo deve se a partir de {Year}");
+            RuleFor(x => x.YearManufacture).Must(x => x == Year).WithMessage("The Year must be the current year");
+            RuleFor(x => x.ModelYear).GreaterThanOrEqualTo(Year)
+                .WithMessage($"Vehicle model year must start from {Year}");
         }
     }
 }

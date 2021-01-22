@@ -47,8 +47,8 @@ namespace Truck.Application.Services
         {
             var truckExists = await _truckRepository.GetById(id);
             if (truckExists == null) throw new DomainException("Truck not found");
-            truckExists.SetModelo(request.Modelo);
-            truckExists.SetAnoModelo(request.AnoModelo);
+            truckExists.SetModel(request.Model);
+            truckExists.SetYearModel(request.ModelYear);
             truckExists.IsValid();
             await _truckRepository.Update(truckExists);
             

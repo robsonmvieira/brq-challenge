@@ -1,4 +1,8 @@
+using System;
+using System.Collections.Generic;
 using FluentValidation;
+using FluentValidation.Results;
+using TruckApp.Core.DomainObject;
 using TruckApp.Domain.Rules;
 
 namespace TruckApp.Domain.Entities
@@ -6,28 +10,32 @@ namespace TruckApp.Domain.Entities
 {
     public class Truck: Entity
     {
-        public string Modelo { get; private set; }
-        public int AnoFabricacao { get; private set; }
-        public int AnoModelo { get; private set; }
+        public string Model { get; private set; }
+        public int YearManufacture { get; private set; }
+        public int ModelYear { get; private set; }
 
 
-        public Truck(string modelo, int anoFabricacao, int anoModelo)
+        public Truck(string model, int yearManufacture, int modelYear)
         {
-            Modelo = modelo;
-            AnoFabricacao = anoFabricacao;
-            AnoModelo = anoModelo;
+            Model = model;
+            YearManufacture = yearManufacture;
+            ModelYear = modelYear;
         }
 
-        public void SetModelo(string modelo)
+        public void SetModel(string model)
         {
-            Modelo = modelo;
+            List<string> optionsName = new List<string> {"FM", "FH"};
+            if (!optionsName.Contains(model)) throw new DomainException("O modelo do veículo só pode ser FH ou FM");
+            Model = model;
         }
 
-        public void SetAnoModelo(int anoModelo)
+        public void SetYearModel(int modelYear)
         {
-            AnoModelo = anoModelo;
+            if (modelYear < DateTime.Now.Year)
+                throw new DomainException("O Ano do modelo não pode ser inferior ao ano Atual");
+            ModelYear = modelYear;
         }
 
-        public void IsValid() => new TruckValidator().ValidateAndThrow(this);
+        public ValidationResult IsValid() => new TruckValidator().Validate(this);
     }
 }

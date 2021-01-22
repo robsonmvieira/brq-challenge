@@ -4,7 +4,6 @@ using Truck.Application.Mapper;
 using Truck.Application.Services;
 using Truck.Application.Services.interfaces;
 using TruckApp.Data.Configuration;
-using TruckApp.Domain.Repositories;
 
 namespace Truck.Application.Configuration
 {

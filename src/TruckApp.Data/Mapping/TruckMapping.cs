@@ -10,9 +10,11 @@ namespace TruckApp.Data.Mapping
         {
             builder.ToTable("Trucks");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Modelo).IsRequired();
-            builder.Property(x => x.AnoFabricacao).IsRequired();
-            builder.Property(x => x.AnoModelo).IsRequired();
+            builder.Property(x => x.Model)
+                .IsRequired()
+                .HasColumnType("varchar(2)");
+            builder.Property(x => x.YearManufacture).IsRequired();
+            builder.Property(x => x.ModelYear).IsRequired();
         }
     }
 }

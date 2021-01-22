@@ -5,8 +5,8 @@ namespace Truck.Application.DTOS
     public class TruckDtoResponse
     {
         public Guid Id { get; set; }
-        public string Modelo { get; set; }
-        public int AnoFabricacao { get; set; }
-        public int AnoModelo { get;  set; }
+        public string Model { get; set; }
+        public int YearModel { get; set; }
+        public int YearManufacture { get; set; }
     }
 }
