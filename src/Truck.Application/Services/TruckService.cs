@@ -19,7 +19,7 @@ namespace Truck.Application.Services
             _truckRepository = truckRepository;
             _mapper = mapper;
         }
-        public async Task<bool> AddNewTruck(TruckDtoRequest request)
+        public async Task<Guid> AddNewTruck(TruckDtoRequest request)
         {
             var truck = _mapper.Map<TruckApp.Domain.Entities.Truck>(request);
             
@@ -29,7 +29,7 @@ namespace Truck.Application.Services
                 return (await _truckRepository.Add(truck));    
             }
 
-            return false;
+            return Guid.Empty;
 
         }
 

@@ -7,7 +7,7 @@ namespace Truck.Application.Services.interfaces
 {
     public interface ITruckService
     {
-        Task<bool> AddNewTruck(TruckDtoRequest request);
+        Task<Guid> AddNewTruck(TruckDtoRequest request);
         Task<IEnumerable<TruckDtoResponse>> ListTrucks();
 
         Task<TruckDtoResponse> GetTruckById(Guid id);

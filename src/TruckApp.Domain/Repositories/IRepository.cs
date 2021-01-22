@@ -7,7 +7,7 @@ namespace TruckApp.Domain.Repositories
 {
     public interface IRepository<T> where T: Entity
     {
-        Task<bool> Add(T entity);
+        Task<Guid> Add(T entity);
         Task<IEnumerable<T>> ListAll();
         Task<T> GetById(Guid id);
         Task Update(T entity);

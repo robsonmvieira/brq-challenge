@@ -10,21 +10,12 @@ using Truck.Application.Services.interfaces;
 using TruckApp.Core.DomainObject;
 using TruckApp.Domain.Repositories;
 using Xunit;
-using Truck = TruckApp.Domain.Entities.Truck;
 
 namespace TruckApp.Application.Tests
 {
     public class TruckServiceTest
     {
-        
-        /*
-         * Task AddNewTruck(TruckDtoRequest request);
-        Task<IEnumerable<TruckDtoResponse>> ListTrucks();
-        Task<TruckDtoResponse> GetTruckById(Guid id);
-        Task UpdateTruck(Guid id,TruckDtoRequest request);
-        Task RemoveTruck(Guid id);
-         */
-        
+
         [Fact(DisplayName = "CreateNewTruck should be able to create new truck if valid data is provided")]
         [Trait("Service", "TruckService")]
         public void TruckService_CreateNewTruck_ShouldCreateNewTruckIfValidDataIsProvided()
@@ -35,7 +26,6 @@ namespace TruckApp.Application.Tests
 
             var mockTruckService = new TruckService(truckRepositoryFake.Object, mapperFake.Object);
             
-            // var mock = mockTruckService.Object;
             var truck = new Domain.Entities.Truck("FM", 2021);
             var truckDto = new TruckDtoRequest()
             {
@@ -46,7 +36,7 @@ namespace TruckApp.Application.Tests
             
             // act
             mapperFake.Setup(m => m.Map<Domain.Entities.Truck>(It.IsAny<TruckDtoRequest>())).Returns(truck);
-            truckRepositoryFake.Setup(m => m.Add(truck)).ReturnsAsync(() => true);
+            truckRepositoryFake.Setup(m => m.Add(truck)).ReturnsAsync(() => Guid.NewGuid());
             
             
             // assert
@@ -54,7 +44,7 @@ namespace TruckApp.Application.Tests
           
 
             truckRepositoryFake.Verify(x => x.Add(truck), Times.Once);
-            Assert.True(response.Result);
+            Assert.True(response.Result != Guid.Empty);
         }
         
         [Fact(DisplayName = "CreateNewTruck should throw if valid data is provided")]
@@ -77,7 +67,7 @@ namespace TruckApp.Application.Tests
             
             // act
             mapperFake.Setup(m => m.Map<Domain.Entities.Truck>(It.IsAny<TruckDtoRequest>())).Returns(truck);
-            truckRepositoryFake.Setup(m => m.Add(truck)).ReturnsAsync(() => false);
+            truckRepositoryFake.Setup(m => m.Add(truck)).ReturnsAsync(() => Guid.Empty);
             
             
             // assert
@@ -85,7 +75,7 @@ namespace TruckApp.Application.Tests
           
 
             truckRepositoryFake.Verify(x => x.Add(truck), Times.Once);
-            Assert.False(response.Result);
+            Assert.True(response.Result == Guid.Empty);
         }
         
         [Fact(DisplayName = "ListAll should return a list of truck")]
@@ -163,8 +153,38 @@ namespace TruckApp.Application.Tests
             Assert.ThrowsAsync<DomainException>(() =>  mock.GetTruckById(id));
         }
         
-       
-        
+        // [Fact(DisplayName = "Remove should remove truck")]
+        // [Trait("Service", "TruckService")]
+        // public void TruckService_Remove_ShouldRemoveTruck()
+        // {
+        //     Mock<ITruckRepository> truckRepositoryFake = new Mock<ITruckRepository>();
+        //     Mock<IMapper> mapperFake = new Mock<IMapper>();
+        //
+        //     var mockTruckService = new TruckService(truckRepositoryFake.Object, mapperFake.Object);
+        //     
+        //     var truck = new Domain.Entities.Truck("FM", 2021);
+        //     var truckDto = new TruckDtoRequest()
+        //     {
+        //         Model = "FH",
+        //         ModelYear = 2022,
+        //         
+        //     };
+        //     
+        //     // act
+        //     mapperFake.Setup(m => m.Map<Domain.Entities.Truck>(It.IsAny<TruckDtoRequest>())).Returns(truck);
+        //     mapperFake.Setup(m => m.Map<List<TruckDtoResponse>>(It.IsAny<List<Domain.Entities.Truck>>())).Returns(new List<TruckDtoResponse>());
+        //     truckRepositoryFake.Setup(m => m.Add(truck)).ReturnsAsync(() => Guid.NewGuid());
+        //     truckRepositoryFake.Setup(m => m.Remove(truck.Id)).Returns(() => null);
+        //     truckRepositoryFake.Setup(m => m.ListAll()).ReturnsAsync(() => new List<Domain.Entities.Truck>());
+        //     
+        //     
+        //     var response = mockTruckService.AddNewTruck(truckDto).Result;
+        //     mockTruckService.RemoveTruck(response);
+        //     
+        //     var trucks = mockTruckService.ListTrucks().Result;
+        //     // assert
+        //     Assert.False(trucks.Any(x => x.Id == response));
+        // }
         
     }
 }

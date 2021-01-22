@@ -18,10 +18,11 @@ namespace TruckApp.Data.Repositories
             _truckContext = truckContext;
             Query = _truckContext.Set<T>();
         }
-        public async Task<bool> Add(T entity)
+        public async Task<Guid> Add(T entity)
         {
             Query.Add(entity);
-            return (await _truckContext.SaveChangesAsync() > 0);
+            await _truckContext.SaveChangesAsync();
+            return entity.Id;
         }
 
         public async Task<IEnumerable<T>> ListAll()
